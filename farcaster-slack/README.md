@@ -60,11 +60,11 @@ export default defineComponent({
     const fcText = fcTextInputString.replace(regex, mentionLinkString);
 
     // Takes the caster username and turns it into a link
-    const fcUsername = steps.trigger.event.body.username;
+    const fcUsername = steps.trigger.event.body.author_display_name;
     const fcUserSearchUrl = `<https://searchcaster.xyz/search?username=${fcUsername}|@${fcUsername}>`;
 
     // Takes the cast merkle root and creates a link to the cast, which will deep link to the Farcaster app from Alertcaster
-    const fcMerkleRoot = steps.trigger.event.body.merkle_root;
+    const fcMerkleRoot = steps.trigger.event.body.hash;
     const markdownLink = `<http://fc.alertcaster.xyz/casts/${fcMerkleRoot}/null|Open Cast> or see more casts from ${fcUserSearchUrl}`
 
     // Creates a Slack Block Kit block payload
@@ -103,7 +103,7 @@ Use your preferred Slack account
 Copy the code below to use the following format for the bot username: "Full Name (@username)".
 
 ```
-{{steps.trigger.event.body.display_name}} (@{{steps.trigger.event.body.username}})
+{{steps.trigger.event.body.author_display_name}} (@{{steps.trigger.event.body.author_username}})
 ```
 
 #### Icon (image URL)
@@ -111,7 +111,7 @@ Copy the code below to use the following format for the bot username: "Full Name
 This users the caster avatar URL for the bot icon.
 
 ```
-{{steps.trigger.event.body.avatar_url}}
+{{steps.trigger.event.body.author_pfp_url}}
 ```
 
 #### Include link to workflow
